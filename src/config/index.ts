@@ -26,5 +26,7 @@ export const config = {
     httpOnly: true,
     secure: true,
     sameSite: "none" as const,
+    domain: undefined, // Let the browser handle it
+    path: "/", // Make sure cookies are accessible on all paths
   },
 };
