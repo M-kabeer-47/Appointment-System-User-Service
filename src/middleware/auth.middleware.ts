@@ -10,7 +10,15 @@ export const authenticate = (
   next: NextFunction
 ): void => {
   try {
-    const token = req.cookies.accessToken;
+    // Check Authorization header first, then cookies as fallback
+    let token: string | undefined;
+
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
+    } else {
+      token = req.cookies.accessToken;
+    }
 
     if (!token) {
       res.status(401).json({ error: "Access token required" });
