@@ -25,6 +25,6 @@ export const config = {
   cookie: {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: "none" as const,
   },
 };
